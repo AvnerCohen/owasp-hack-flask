@@ -1,0 +1,50 @@
+.DS_Store
+*.py[cod]
+storage/*.*
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+__pycache__
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+.cache
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.idea
+.pydevproject
+venv
+/~
+screenit/screenit.log
+screenit/user_action.log
+atlassian*
+screenit/screenit/static/app/styles/css/
+screenit/local.ini.*
+screenit/screenit/static/node_modules/
+screenit/screenit/static/build
+screenit/screenit/static/yarn-error.log
+screenit/screenit/static/app/images/pdf/

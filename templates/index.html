@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Buy Stuff - Safetly</title>
+    <style type="text/css">
+        .stuff_table td {
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+<body>
+        Welcome, <a href="/profile">{{ username }}</a>.<br>
+        You have last searched for <b>"{{ filter | safe}}"</b>
+    <form>
+        <input type="text" name="query">
+        <input type="submit">
+    </form>
+    <table border="1" class='stuff_table'>
+        <tr>
+            {% for header in fields %}
+                <th>
+                {% if header == sort['field'] %}
+                    <a href="?f={{header}}&dir={{sort['dir']}}">{{header}}</a> {% if sort['dir'] =='asc' %}▼{% else %}▲{% endif %}
+                {% else %}
+                    <a href="?f={{header}}&dir=asc">{{header}}</a> ▲
+                {% endif %}
+                </th>
+            {% endfor %}
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.product}}</td>
+            <td>{{item.description}}</td>
+            <td>£ {{item.price}}.00</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> 
