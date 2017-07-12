@@ -26,13 +26,13 @@ CURRENT_IP = socket.gethostbyname(socket.gethostname())
 @app.route("/ping")
 def ping():
     resp = Response("More info in Headers.")
-    resp.headers['Source-Origin'] = CURRENT_IP
+    resp.headers['X-Source-Origin'] = CURRENT_IP
     return resp
 
 
 @app.before_request
 def before_request():
-    if str(request.url_rule) == '/login':
+    if str(request.url_rule) in ['/login', '/ping']:
         return
     if 'user' not in request.cookies:
         print "User not logged in"
