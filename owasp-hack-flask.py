@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import sys
 import socket
 import random
@@ -7,12 +6,6 @@ import sqlite3
 from flask import Flask, render_template, Response, request, g, redirect
 from flask import url_for, make_response
 
-
-if sys.version_info.major < 3:
-    reload(sys)
-sys.setdefaultencoding('utf8')
-
-
 app = Flask(__name__)
 
 DB_PATH = './storage/hackme.db'
@@ -20,13 +13,12 @@ DB_PATH = './storage/hackme.db'
 word_file = "/usr/share/dict/words"
 WORDS = open(word_file).read().splitlines()
 
-CURRENT_IP = socket.gethostbyname(socket.gethostname())
 
 
 @app.route("/ping")
 def ping():
     resp = Response("More info in Headers.")
-    resp.headers['X-Source-Origin'] = CURRENT_IP
+    resp.headers['X-Server'] = "Flask"
     return resp
 
 
@@ -35,7 +27,7 @@ def before_request():
     if str(request.url_rule) in ['/login', '/ping']:
         return
     if 'user' not in request.cookies:
-        print "User not logged in"
+        print("User not logged in")
         return redirect(url_for('login'))
 
 
@@ -61,7 +53,7 @@ def login():
 def check_login():
     password = request.form['password']
     username = request.form['name']
-    print username
+    print(username)
     query_results = run_query('SELECT * FROM USERS WHERE password="%s" AND name="%s";' % (password, username))
     if query_results.fetchone():
         response = make_response(redirect('/list'))
@@ -86,14 +78,14 @@ def profle_update():
 
 #####################################################
 def run_query(query):
-    print "GOING TO RUN: [%s]" % query
+    print("GOING TO RUN: [%s]" % query)
     g.db = sqlite3.connect(DB_PATH)
     curs = g.db.execute(query)
     return curs
 
 
 def exec_query(query):
-    print "GOING TO EXEC: [%s]" % query
+    print("GOING TO EXEC: [%s]" % query)
     g.db = sqlite3.connect(DB_PATH)
     c = g.db.cursor()
     c.execute(query)
@@ -130,6 +122,8 @@ def random_word(count=1):
 def random_string(length=12):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
 
+PORT = 1337
 if __name__ == '__main__':
     seed_db()
-    app.run(port=1337, host='0.0.0.0')
+    print("Server ready on http://0.0.0.0:%s" % PORT)
+    app.run(port=PORT, host='0.0.0.0')

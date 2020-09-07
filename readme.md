@@ -19,6 +19,30 @@ A simple Flask based app to simulate and play with some of the more common [OWAS
 * User Profile Form
 * Predefind SQLLite database with set of shopping items.
 
+## Installation
+
+```sh
+$> python -m venv venv
+$> source venv/bin/activate
+$> pip install -r requirements.txt -U
+```
+
+## Running
+```sh
+$> source venv/bin/activate
+$> FLASK_APP=owasp-hack-flask.py python -m flask run --port=1337
+```
+
+## To Fully Solve you should:
+
+Make sure to consult console logs to solve.
+
+#. (SQL Injection) Be able to login to the application (without a known user name and password).
+#. (XSS) Use Search Box to simulate XSS
+#. (SQL Injection) Extract user and password list from Search Box
+#. (Underprotected APIs) With Known User Name, update email for a different user.
+
+
 
 ## Hints
 

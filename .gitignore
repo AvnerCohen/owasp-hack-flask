@@ -38,13 +38,4 @@ nosetests.xml
 .idea
 .pydevproject
 venv
-/~
-screenit/screenit.log
-screenit/user_action.log
-atlassian*
-screenit/screenit/static/app/styles/css/
-screenit/local.ini.*
-screenit/screenit/static/node_modules/
-screenit/screenit/static/build
-screenit/screenit/static/yarn-error.log
-screenit/screenit/static/app/images/pdf/
+storage/hackme.db
