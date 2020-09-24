@@ -37,10 +37,10 @@ $> FLASK_APP=owasp-hack-flask.py python -m flask run --port=1337
 
 Make sure to consult console logs to solve.
 
-#. (SQL Injection) Be able to login to the application (without a known user name and password).
-#. (XSS) Use Search Box to simulate XSS
-#. (SQL Injection) Extract user and password list from Search Box
-#. (Underprotected APIs) With Known User Name, update email for a different user.
+* (SQL Injection) Be able to login to the application (without a known user name and password).
+* (XSS) Use Search Box to simulate XSS
+* (SQL Injection) Extract user and password list from Search Box
+* (Underprotected APIs) With Known User Name, update email for a different user.
 
 
 

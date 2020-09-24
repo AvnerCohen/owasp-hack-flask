@@ -9,6 +9,7 @@ from flask import url_for, make_response
 app = Flask(__name__)
 
 DB_PATH = './storage/hackme.db'
+PORT = 1337
 
 word_file = "/usr/share/dict/words"
 WORDS = open(word_file).read().splitlines()
@@ -91,7 +92,7 @@ def exec_query(query):
     c.execute(query)
     g.db.commit()
 
-
+@app.before_first_request
 def seed_db():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -113,6 +114,7 @@ def seed_db():
         c.execute('INSERT INTO STUFF VALUES (%i, "%s", "%s", %i)' % (product_no, product, product_description, price))
     conn.commit()
     conn.close()
+    print("DB SEEDED")
 
 
 def random_word(count=1):
@@ -121,9 +123,3 @@ def random_word(count=1):
 
 def random_string(length=12):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(length))
-
-PORT = 1337
-if __name__ == '__main__':
-    seed_db()
-    print("Server ready on http://0.0.0.0:%s" % PORT)
-    app.run(port=PORT, host='0.0.0.0')
